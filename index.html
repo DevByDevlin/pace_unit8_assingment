@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 8 Assignment: Lessons Learned</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+      padding: 32px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      background: white;
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: #111827;
+    }
+
+    .instruction {
+      font-size: 1.05rem;
+      color: #4b5563;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 180px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-top: 6px solid #2563eb;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: #111827;
+    }
+
+    .card p {
+      color: #6b7280;
+      margin-bottom: 18px;
+    }
+
+    button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      align-self: flex-start;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.72);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      max-width: 720px;
+      width: 100%;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: popIn 0.2s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.94);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal h2 {
+      margin-bottom: 14px;
+      color: #111827;
+    }
+
+    .modal p {
+      margin-bottom: 14px;
+      color: #374151;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: #e5e7eb;
+      color: #111827;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+
+    .close-btn:hover {
+      background: #d1d5db;
+    }
+
+    footer {
+      margin-top: 32px;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    footer h2 {
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 16px;
+      }
+
+      .card button {
+        display: none;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 1px solid #d1d5db;
+      }
+
+      header, footer {
+        box-shadow: none;
+        border: 1px solid #d1d5db;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Unit 8 Assignment: Lessons Learned</h1>
+      <p class="instruction">
+        Reflect on what I learned throughout the course, explain how I will use it moving forward, and identify the key takeaways from each unit.
+      </p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <div>
+          <h2>Unit 1</h2>
+          <p>Introduction, Mindset, and DAACS</p>
+        </div>
+        <button onclick="openModal('unit1')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 2</h2>
+          <p>Goals and Motivations</p>
+        </div>
+        <button onclick="openModal('unit2')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 3</h2>
+          <p>Big Rocks and Schedule Organization</p>
+        </div>
+        <button onclick="openModal('unit3')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 4</h2>
+          <p>Success Network</p>
+        </div>
+        <button onclick="openModal('unit4')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 5</h2>
+          <p>Career Trends and Interview Prep</p>
+        </div>
+        <button onclick="openModal('unit5')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 6</h2>
+          <p>Networking and Informational Interview</p>
+        </div>
+        <button onclick="openModal('unit6')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 7</h2>
+          <p>Support Services</p>
+        </div>
+        <button onclick="openModal('unit7')">Click to read more</button>
+      </section>
+
+      <section class="card">
+        <div>
+          <h2>Unit 8</h2>
+          <p>Final Reflection</p>
+        </div>
+        <button onclick="openModal('unit8')">Click to read more</button>
+      </section>
+    </main>
+
+    <footer>
+      <h2>AI Disclosure Statement</h2>
+      <p>I used ChatGPT as a thought partner to help organize my ideas, improve clarity, and format this assignment into a single HTML file.</p>
+    </footer>
+  </div>
+
+  <div id="overlay" class="overlay" onclick="closeModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeModal()">X</button>
+      <h2 id="modalTitle"></h2>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const content = {
+      unit1: {
+        title: "Unit 1 – Introduction, Mindset, and DAACS",
+        body: `
+          <p>The DAACS assessment helped me see where I was starting from as a student. It showed me that I had some strengths, but also areas where I needed to improve, especially with time management, metacognition, and learning strategies.</p>
+          <p>The biggest thing I learned in this unit is that success in school is not just about effort. It is about understanding how I learn, being honest about where I need to improve, and building better habits early.</p>
+        `
+      },
+      unit2: {
+        title: "Unit 2 – Goals and Motivations",
+        body: `
+          <p>This unit helped me connect my goals to my actual motivations. Instead of just saying I want to do well in school, I had to think about why it matters and how it connects to my long-term goals.</p>
+          <p>Moving forward, I will use this by setting goals that are specific and realistic. I learned that vague goals do not help much unless they are connected to a clear reason and a real plan.</p>
+        `
+      },
+      unit3: {
+        title: "Unit 3 – Big Rocks and Schedule Organization",
+        body: `
+          <p>This was one of the most useful units for me. The idea of big rocks helped me think about priorities first instead of just reacting to everything as it comes up.</p>
+          <p>I learned that if I do not plan my schoolwork, family time, work, and personal goals, my time will get filled with less important things. Moving forward, I will keep using a schedule and start assignments earlier in the week.</p>
+        `
+      },
+      unit4: {
+        title: "Unit 4 – Success Network",
+        body: `
+          <p>This unit showed me that success is not something I have to do completely alone. Advisors, success coaches, instructors, classmates, and family can all be part of a support system.</p>
+          <p>The main takeaway for me is that asking for help early is a smart move, not a weakness. I will continue using my support network when I need guidance with classes, degree planning, or future career decisions.</p>
+        `
+      },
+      unit5: {
+        title: "Unit 5 – Career Trends and Interview Prep",
+        body: `
+          <p>This unit helped me think more strategically about my career field. Looking at trends made me think about where technology, data, and AI are going, and what skills I need to keep building.</p>
+          <p>The informational interview preparation also helped me understand the value of asking better questions. Moving forward, I will keep researching my field and learning from people who are already where I want to go.</p>
+        `
+      },
+      unit6: {
+        title: "Unit 6 – Networking and Informational Interview",
+        body: `
+          <p>This unit reinforced that networking is more than just looking for jobs. It is about building relationships, learning from others, and staying connected to people who can offer advice and perspective.</p>
+          <p>I learned that a good conversation with the right person can give you more direction than hours of guessing on your own. I will keep using networking as a way to grow personally, academically, and professionally.</p>
+        `
+      },
+      unit7: {
+        title: "Unit 7 – Support Services",
+        body: `
+          <p>This unit helped me understand how many support services UMGC has available. Resources like tutoring, writing support, advising, and career services are there to help students succeed.</p>
+          <p>The biggest takeaway is that these services should be used before things become a problem. Moving forward, I will use support services as tools to improve my work and stay on track, not just as a last resort.</p>
+        `
+      },
+      unit8: {
+        title: "Unit 8 – Final Reflection",
+        body: `
+          <p>Looking back, this course helped me build a stronger foundation for school and future success. I improved in time management, planning, reflection, and understanding how I learn best.</p>
+          <p>My biggest takeaway is that success comes down to consistency, planning, and using the right strategies. It is not just about working harder. It is about working smarter, staying disciplined, and building systems that support the goals I am trying to reach.</p>
+        `
+      }
+    };
+
+    function openModal(unit) {
+      document.getElementById("modalTitle").innerText = content[unit].title;
+      document.getElementById("modalContent").innerHTML = content[unit].body;
+      document.getElementById("overlay").classList.add("active");
+    }
+
+    function closeModal(event) {
+      if (!event || event.target.id === "overlay") {
+        document.getElementById("overlay").classList.remove("active");
+      }
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        document.getElementById("overlay").classList.remove("active");
+      }
+    });
+  </script>
+</body>
+</html>
